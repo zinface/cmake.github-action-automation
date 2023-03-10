@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5.1)
 
-find_package(Qt5 COMPONENTS Core Widgets Network Concurrent WebEngineWidgets Sql WebSockets)
+find_package(Qt5 COMPONENTS Core Widgets Network)
 
 # function(target_link_qt5 NAME)
 #     target_link_libraries(${NAME} 
