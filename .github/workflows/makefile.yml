@@ -27,16 +27,25 @@ jobs:
         run: |
           make package
 
+      - name: Build Appimage
+        run: |
+          make linuxdeploy
+          make genrate-appimage
+
       - name: Upload package
         uses: actions/upload-artifact@v2
         with:
           name: package
-          path: build/*.deb
+          path: |
+            build/*.deb
+            build/*.Appimage
 
       - name: Create Release
         uses: ncipollo/release-action@v1.12.0
         with:
-          artifacts: build/*.deb
+          artifacts: |
+            build/*.deb
+            build/*.Appimage
           body: |
             This is the first release.
           draft: false
