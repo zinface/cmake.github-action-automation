@@ -1,26 +1,22 @@
-name: Makefile CI
+name: build-and-package
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
 
 jobs:
   build:
-
     runs-on: ubuntu-20.04
 
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v3
-      with:
-        version: '5.11'
+      - uses: actions/checkout@v2
 
-    - name: configure
-      run: make
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y debhelper devscripts qt5-default
 
-    - name: package
-      run: make package
+      - name: Build and package
+        run: |
+          make package
