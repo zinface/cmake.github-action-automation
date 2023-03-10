@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
-    container: docker://qt:5
+    container: docker://atom63/qt-docker:linux-buster-x86_64-qt5
 
     steps:
       - uses: actions/checkout@v2
