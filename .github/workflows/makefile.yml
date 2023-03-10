@@ -20,3 +20,22 @@ jobs:
       - name: Build and package
         run: |
           make package
+
+      - name: Upload package
+        uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: build/*.deb
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v1.0.0
+          release_name: Release v1.0.0
+          body: |
+            This is the first release.
+          draft: false
+          prerelease: false
