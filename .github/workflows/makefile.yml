@@ -2,6 +2,8 @@ name: build-and-package
 
 on:
   push:
+    tags:
+      - "*"
     branches:
       - master
 
@@ -27,14 +29,12 @@ jobs:
           name: package
           path: build/*.deb
 
-      - name: Create release
+      - name: Create Release
         id: create_release
-        uses: actions/create-release@v1.0.0
+        uses: ncipollo/release-action@v1.12.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.0.0
-          release_name: Release v1.0.0
           body: |
             This is the first release.
           draft: false
