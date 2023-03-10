@@ -38,14 +38,14 @@ jobs:
           name: package
           path: |
             build/*.deb
-            build/*.Appimage
+            build/*.AppImage
 
       - name: Create Release
         uses: ncipollo/release-action@v1.12.0
         with:
           artifacts: |
             build/*.deb
-            build/*.Appimage
+            build/*.AppImage
           body: |
             This is the first release.
           draft: false
