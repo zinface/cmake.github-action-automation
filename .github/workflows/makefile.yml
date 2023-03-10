@@ -13,8 +13,6 @@ jobs:
     container: docker://atom63/qt-docker:linux-buster-x86_64-qt5
 
     steps:
-      - uses: actions/checkout@v2
-
       - name: Install dependencies
         run: |
           sudo apt-get update -y
