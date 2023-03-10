@@ -10,6 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    container: docker://qt:5
 
     steps:
       - uses: actions/checkout@v2
@@ -17,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y debhelper devscripts qt5-default
+          sudo apt-get install -y build-essential
 
       - name: Build and package
         run: |
@@ -30,12 +31,10 @@ jobs:
           path: build/*.deb
 
       - name: Create Release
-        id: create_release
         uses: ncipollo/release-action@v1.12.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           body: |
             This is the first release.
           draft: false
           prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
